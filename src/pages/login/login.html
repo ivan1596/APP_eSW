@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding style="background:url(assets/img/p54MNFGlR0aFiRkhBc6A_hero-unit-bg.jpg) no-repeat center;background-size:cover;" id="page2">
+  <img src="assets/img/4PLjK490SdWqMlW0zWM5_logo.png" style="display:block;width:30%;height:auto;margin-left:auto;margin-right:auto;" />
+  <div class="spacer" style="height:10px;" id="login-spacer2"></div>
+  <form id="login-form1" autocomplete="off" #loginForm="ngForm">
+    <ion-list id="login-list1">
+      <ion-item id="login-input1">
+        <ion-label>
+          Email
+        </ion-label>
+        <ion-input placeholder="Email" name="email" id="loginField" type="text" required [(ngModel)]="email" ></ion-input>
+      </ion-item>
+      <ion-item id="login-input2">
+        <ion-label>
+          Password
+        </ion-label>
+        <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="spacer" style="height:10px;" id="login-spacer1"></div>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  
+    <button id="login-button1" ion-button full (click)="goToHome()" [disabled]="!loginForm.form.valid" class="submit-btn" full type="submit">LOGIN </button>
+    <button id="login-button2" ion-button clear color="light" block on-click="goToRegistrazione()">
+      Registrati
+    </button>
+  </form>
+
+  
+    
+ 
+</ion-content>

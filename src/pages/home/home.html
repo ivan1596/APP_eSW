@@ -1,14 +1,29 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Home
     </ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding style="background:url(assets/img/Fmy5XnvUTg6CivDu6Mrx_hero-unit-bg.jpg) no-repeat center;background-size:cover;" id="page1">
+  <img src="assets/img/8XvX25F5QAi1K1kYJGVM_logo.png" style="display:block;width:30%;height:auto;margin-left:auto;margin-right:auto;" />
+  <button id="home-button7" ion-button outline color="light" block icon-right on-click="goToProfilo()">
+    Profilo
+    <ion-icon name="arrow-dropright-circle"></ion-icon>
+  </button>
+  <div class="spacer" style="height:25px;" id="home-spacer3"></div>
+  <button id="home-button8" ion-button outline color="light" block icon-right on-click="goToNegozio()">
+    Negozio
+    <ion-icon name="arrow-dropright-circle"></ion-icon>
+  </button>
+  <div class="spacer" style="height:25px;" id="home-spacer4"></div>
+  <button id="home-button9" ion-button outline color="light" block icon-right on-click="goToCorsi()">
+    Corsi
+    <ion-icon name="arrow-dropright-circle"></ion-icon>
+  </button>
+  <div class="spacer" style="height:25px;" id="home-spacer7"></div>
+  <button id="home-button15" ion-button outline color="light" block icon-right on-click="goToContattaci()">
+    Contattaci
+    <ion-icon name="arrow-dropright-circle"></ion-icon>
+  </button>
 </ion-content>
