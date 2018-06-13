@@ -6,34 +6,24 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding style="background:url(assets/img/dMTLOfZBQUw9lAAqFBox_header_bg.jpg) no-repeat center;background-size:cover;" id="page3">
-  <form id="registrazione-form2">
+  <form id="registrazione-form2" #regForm="ngForm">
     <ion-list id="registrazione-list2">
-      <ion-item id="registrazione-input3">
-        <ion-label>
-          Nome
-        </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
-      </ion-item>
-      <ion-item id="registrazione-input6">
-        <ion-label>
-          Cognome
-        </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
-      </ion-item>
       <ion-item id="registrazione-input4">
         <ion-label>
           Email
         </ion-label>
-        <ion-input type="email" placeholder=""></ion-input>
+        <ion-input type="text"  [(ngModel)]="user.email" name="email"></ion-input>
       </ion-item>
       <ion-item id="registrazione-input5">
         <ion-label>
           Password
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input type="password"  #password="ngModel" [(ngModel)]="user.password" name="password" minlength="6" required ngControl="password"></ion-input>
       </ion-item>
+      <div *ngIf="password.errors?.minlength" class="alert alert-danger">LA PASSWORD DEVE AVERE MINIMO 6 CARATTERI</div>
+      <div *ngIf="password.errors?.required" class="alert alert-danger"  background-color="white">PASSWORD OBBLIGATORIA</div>
     </ion-list>
-    <button id="registrazione-button3" ion-button color="stable" block>
+    <button id="registrazione-button3" ion-button color="stable" block (click)="reg(user)">
       Registrati
     </button>
   </form>

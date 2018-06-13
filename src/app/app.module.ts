@@ -10,12 +10,14 @@ import { NegozioPage } from '../pages/negozio/negozio';
 import { CorsiPage } from '../pages/corsi/corsi';
 import { ContattaciPage } from '../pages/contattaci/contattaci';
 import { HttpModule } from '@angular/http';
-import { OAuthService, UrlHelperService } from 'angular-oauth2-oidc';
+import {AngularFireModule} from 'angularfire2';
 import { HttpClientModule } from '@angular/common/http';
+import {AngularFireAuthModule} from 'angularfire2/auth';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { FIREBASE_CONFIG } from './app.firebase.conf';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     HttpClientModule,
     BrowserModule,
     HttpModule,
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireAuthModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -46,8 +50,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ContattaciPage
   ],
   providers: [
-    UrlHelperService,
-    OAuthService,
+    
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

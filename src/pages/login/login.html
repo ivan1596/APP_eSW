@@ -4,34 +4,51 @@
       Login
     </ion-title>
   </ion-navbar>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </ion-header>
 <ion-content padding style="background:url(assets/img/p54MNFGlR0aFiRkhBc6A_hero-unit-bg.jpg) no-repeat center;background-size:cover;" id="page2">
   <img src="assets/img/4PLjK490SdWqMlW0zWM5_logo.png" style="display:block;width:30%;height:auto;margin-left:auto;margin-right:auto;" />
   <div class="spacer" style="height:10px;" id="login-spacer2"></div>
-  <form id="login-form1" autocomplete="off" #loginForm="ngForm">
+  <form id="login-form1" autocomplete="off" #loginForm="ngForm" >
     <ion-list id="login-list1">
       <ion-item id="login-input1">
         <ion-label>
           Email
         </ion-label>
-        <ion-input placeholder="Email" name="email" id="loginField" type="text" required [(ngModel)]="email" ></ion-input>
+        <ion-input placeholder="Email" name="email" id="loginField" type="text" required [(ngModel)]="user.email" ></ion-input>
       </ion-item>
       <ion-item id="login-input2">
         <ion-label>
           Password
         </ion-label>
-        <ion-input placeholder="Password" name="password" id="passwordField" type="password" required [(ngModel)]="password"></ion-input>
+        <ion-input ngControl="password" name="password" id="passwordField" type="password" minlength="6" required [(ngModel)]="user.password" #password="ngModel"></ion-input>
       </ion-item>
+      <!-- <div *ngIf = "password.hasError('minlength') && !password.hasError('required')" class = "alert alert-danger">
+        <span>Password should contain 6 characters</span>
+      </div>  --> 
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">PASSWORD NON VALIDA </div>
+      <!-- <div *ngIf="password.errors?.minlength" class="alert alert-danger">LA PASSWORD DEVE AVERE MINIMO 6 CARATTERI</div> -->
+      <div *ngIf="password.errors?.required" class="alert alert-danger"  background-color="white">
+        PASSWORD OBBLIGATORIA
+      </div>
     </ion-list>
+    
+    
     <div class="spacer" style="height:10px;" id="login-spacer1"></div>
-    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <!-- <div *ngIf="error" class="alert alert-danger">{{error}}</div> -->
   
-    <button id="login-button1" ion-button full (click)="login()" [disabled]="!loginForm.form.valid" class="submit-btn" full type="submit">LOGIN </button>
+    <button id="login-button1" ion-button full (click)="login(user)" [disabled]="!loginForm.form.valid" class="submit-btn" full type="submit">LOGIN </button>
+    <button ion-button icon-left block clear (click)="loginWithGoogle()">
+      <ion-icon name="logo-google"></ion-icon>
+      Log in with Google
+    </button>
     <button id="login-button2" ion-button clear color="light" block on-click="goToRegistrazione()">
       Registrati
     </button>
   </form>
-
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   
     
  

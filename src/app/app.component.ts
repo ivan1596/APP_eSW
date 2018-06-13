@@ -6,8 +6,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 
 import { LoginPage } from '../pages/login/login';
-import { OAuthService } from 'angular-oauth2-oidc';
+
 import { HomePage } from '../pages/home/home';
+
 
 
 
@@ -18,12 +19,8 @@ export class MyApp {
   
     rootPage:any = LoginPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,  oauthService: OAuthService) {
-    if (oauthService.hasValidIdToken()) {
-      this.rootPage = HomePage;
-    } else {
-      this.rootPage = LoginPage;
-    }
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+   
     
     
       platform.ready().then(() => {
