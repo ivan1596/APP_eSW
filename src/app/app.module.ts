@@ -13,6 +13,7 @@ import { HttpModule } from '@angular/http';
 import {AngularFireModule} from 'angularfire2';
 import { HttpClientModule } from '@angular/common/http';
 import {AngularFireAuthModule} from 'angularfire2/auth';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -50,7 +51,7 @@ import { FIREBASE_CONFIG } from './app.firebase.conf';
     ContattaciPage
   ],
   providers: [
-    
+    GooglePlus,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

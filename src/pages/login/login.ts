@@ -1,15 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { RegistrazionePage } from '../registrazione/registrazione';
 import { HomePage } from '../home/home';
 import {User} from '../../models/user';
-/*import { RegistrazionePage } from '../registrazione/registrazione';*/
+import { ToastController } from 'ionic-angular';
 import {AngularFireAuth} from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-/*import { ProfiloPage } from '../profilo/profilo';*/
-/* import { NegozioPage } from '../negozio/negozio';
-import { CorsiPage } from '../corsi/corsi';
-import { ContattaciPage } from '../contattaci/contattaci'; */
+// import * as firebase from 'firebase/app';
+/* import { GooglePlus } from '@ionic-native/google-plus'; */
+import firebase from 'firebase';
+
 
 
 
@@ -21,31 +20,48 @@ import { ContattaciPage } from '../contattaci/contattaci'; */
 export class LoginPage {
    user={} as User;
 
-  constructor(public navCtrl: NavController, public afAuth: AngularFireAuth) {
+  //  userProfile: any = null; For goggle and android authentication
+
+  constructor(public navCtrl: NavController, public afAuth: AngularFireAuth, private toastCtrl: ToastController) {
+    /*For google authenticated on android and ios  add private googlePlus: GooglePlus,*/
+   /*  firebase.auth().onAuthStateChanged( user => {
+      if (user){
+        this.userProfile = user;
+      } else { 
+          this.userProfile = null;
+      }
+    }); */
     
 
   }
 
-    
+  
 
   async login(user : User){
+    let toast = this.toastCtrl.create({
+      message: "E-Mail/Password Non Corretti",
+      duration: 3000,
+      position: 'top'
+    });
     try{
-      const result = this.afAuth.auth.signInWithEmailAndPassword(user.email,user.password)
+      const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email,user.password)
       if(result){
         this.navCtrl.setRoot(HomePage);
-      }else {
-        console.log("Utente non registrato");
-        this.navCtrl.setRoot(LoginPage);
-    
       }
     }catch(e) {
-      var errorCode = e.code;
-      var errorMessage = e.message;
+      toast.present();
+      this.navCtrl.setRoot(LoginPage);
     }
   }
 
-  /* loginWithGoogle() {
-    var provider = new firebase.auth.GoogleAuthProvider();
+    loginWithGoogle() {
+      let toast = this.toastCtrl.create({
+        message: "E-Mail/Password Errati",
+        duration: 3000,
+        position: 'top'
+      });
+      
+      var provider = new firebase.auth.GoogleAuthProvider();
       this.afAuth.auth.signInWithPopup(provider).then(() => {
         this.navCtrl.setRoot(HomePage)
       });
@@ -55,35 +71,40 @@ export class LoginPage {
         }
         var user = result.user;
       }).catch(function(error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        var email = error.email;
-        var credential = error.credential;
+        console.log(error);        
+        toast.present();
+        this.navCtrl.setRoot(LoginPage);
+        
       });
-  } */
+  }
 
-  goToRegistrazione(){
+
+ goToRegistrazione(){
     this.navCtrl.push(RegistrazionePage);
   }
 
-}  
-  /* goToRegistrazione(params){
-    if (!params) params = {};
-    this.navCtrl.push(RegistrazionePage);
-  }goToHome(params){
-    if (!params) params = {};
-    this.navCtrl.push(HomePage);
-  }goToProfilo(params){
-    if (!params) params = {};
-    this.navCtrl.push(ProfiloPage);
-  }goToNegozio(params){
-    if (!params) params = {};
-    this.navCtrl.push(NegozioPage);
-  }goToCorsi(params){
-    if (!params) params = {};
-    this.navCtrl.push(CorsiPage);
-  }goToContattaci(params){
-    if (!params) params = {};
-    this.navCtrl.push(ContattaciPage);
+}
+
+
+
+
+
+ /* loginWithGoogle() {   Google authentication for Android and ios
+    this.googlePlus.login({
+      'webClientId': '953884612296-vfsan1gatsjop71e3cmsc9amn1vsni6f.com.googleusercontent.apps',
+      'offline': true
+    }).then( res => {
+            const googleCredential = firebase.auth.GoogleAuthProvider
+                .credential(res.idToken);
+   
+            firebase.auth().signInWithCredential(googleCredential)
+          .then( response => {
+              console.log("Firebase success: " + JSON.stringify(response));
+          });
+    }, err => {
+        console.error("Error: ", err)
+    });
   } */
 
+ 
+ 
