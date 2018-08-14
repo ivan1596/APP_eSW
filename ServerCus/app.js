@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var methodOverride = require('method-override')
 var cors = require('cors');
-var sqllite = require("./module/sqlite.js");
+var sqlite = require("./module/sqlite.js");
 
 const app = express();
 app.use(logger('dev'));
@@ -31,7 +31,7 @@ app.use(function(req, res, next) {
 
 
 app.get('/prodotti', function (req, res) {
-  sqllite.getProdotti( function (Prodotti) {
+  sqlite.getProdotti( function (Prodotti) {
     var prodotti ={};
     var productList={};
     prodotti.Prodotti =Prodotti;
@@ -45,10 +45,57 @@ app.get('/prodotti', function (req, res) {
     
     var prodottiList=JSON.stringify(obj);
     res.json(productList);
-    console.log("res /prodotti inviata");
+    console.log("prodotti catalogo inviati");
 
   })
 });
+
+app.post('/aggiornaCarrello',function(req,res){
+  console.log('req.body= ',req.body);
+  var prodottoReq=JSON.parse(req.body);
+  //var utente = prodottoReq.Utente; 
+  /* req.body.forEach(p => {
+    var utente = p.utente;
+    console.log(utente);
+    
+  }); */ 
+  //console.log(utente);
+  var utente = prodottoReq.utente;
+  var codice = prodottoReq.codice;
+  var numProd= prodottoReq.quantita;
+  var nomeProd = prodottoReq.nome;
+  var prezzo = prodottoReq.prezzo; 
+  var img = prodottoReq.immagine;
+
+  sqlite.aggiungiAlCarrello(utente,codice,numProd,nomeProd,prezzo,img); 
+});
+
+
+  app.post('/carrello', function (req, res) {
+    console.log ('body req !stringify'+req.body);
+    
+    var ObjUtente = JSON.parse(req.body);
+    var utente = ObjUtente.eUtente;
+    
+    sqlite.getCarrello(function (Prodotti){
+    
+    var prodotti ={};
+    var listaProdotti={};
+    prodotti.Prodotti =Prodotti;
+    
+    var stringProdotti=JSON.stringify(prodotti);
+    
+    var prodottiObj= JSON.parse(stringProdotti);
+    
+    listaProdotti = prodottiObj;
+    
+    res.json(listaProdotti);
+    console.log("prodotti carrello inviati");
+      
+     
+     },utente)
+
+  });
 
 //Inizializza il server
 app.listen(8080, function() {

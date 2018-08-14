@@ -14,6 +14,7 @@ import {AngularFireModule} from 'angularfire2';
 import { HttpClientModule } from '@angular/common/http';
 import {AngularFireAuthModule} from 'angularfire2/auth';
 import { GooglePlus } from '@ionic-native/google-plus';
+import {CarrelloPage} from '../pages/carrello/carrello'
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -29,7 +30,8 @@ import { FIREBASE_CONFIG } from './app.firebase.conf';
     ProfiloPage,
     NegozioPage,
     CorsiPage,
-    ContattaciPage
+    ContattaciPage,
+    CarrelloPage
   ],
   imports: [
     HttpClientModule,
@@ -48,7 +50,8 @@ import { FIREBASE_CONFIG } from './app.firebase.conf';
     ProfiloPage,
     NegozioPage,
     CorsiPage,
-    ContattaciPage
+    ContattaciPage,
+    CarrelloPage
   ],
   providers: [
     GooglePlus,
