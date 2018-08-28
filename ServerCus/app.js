@@ -21,7 +21,7 @@ app.use(bodyParser.text());
 
 app.use(methodOverride());
 app.use(cors());
-// app.set('view engine', 'ejs');
+
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -43,7 +43,7 @@ app.get('/prodotti', function (req, res) {
     var obj = allProductJsonParsed;
     productList=allProductJsonParsed;
     
-    var prodottiList=JSON.stringify(obj);
+    //var prodottiList=JSON.stringify(obj);
     res.json(productList);
     console.log("prodotti catalogo inviati");
 
@@ -68,16 +68,110 @@ app.post('/aggiornaCarrello',function(req,res){
   var img = prodottoReq.immagine;
 
   sqlite.aggiungiAlCarrello(utente,codice,numProd,nomeProd,prezzo,img); 
+  sqlite.aggiornaQuantità(numProd,codice); 
 });
 
+app.post('/confermaOrdine',function(req,res){
+  console.log('req.body ordine= ',req.body);
+  /* var dataCorrente = new Date(); 
+  var dataS = dataCorrente.getDate() + "/"
+                + (dataCorrente.getMonth()+1)  + "/" 
+                + dataCorrente.getFullYear() ;
+  console.log("Data" + dataS); */
+  
+  //var prodottoReq=JSON.parse(req.body);
+  //var utente = prodottoReq.Utente; 
+  req.body.forEach(p => {
+  var dataCorrente = new Date(); 
+  var data = dataCorrente.getDate() + "/" + (dataCorrente.getMonth()+1)  + "/" + dataCorrente.getFullYear();
+  var utente = p.utente;
+  var codice = p.codice;
+  var quantita= p.quantita;
+  var nomeProd = p.nome;
+  var prezzo = p.prezzo; 
+  var img = p.immagine;
+  sqlite.aggiungiOrdine(utente,codice,data,quantita,nomeProd,prezzo,img); 
+  sqlite.cancellaProdotti(utente,codice);
+  });  
+  //console.log(utente);
+  
+
+  
+});
+
+  
 
   app.post('/carrello', function (req, res) {
-    console.log ('body req !stringify'+req.body);
+    
     
     var ObjUtente = JSON.parse(req.body);
     var utente = ObjUtente.eUtente;
     
     sqlite.getCarrello(function (Prodotti){
+    
+    var prodotti ={};
+    var listaProdotti={};
+    prodotti.Prodotti =Prodotti;
+    
+    var stringProdotti=JSON.stringify(prodotti);
+    
+    var prodottiObj= JSON.parse(stringProdotti);
+    
+    listaProdotti = prodottiObj;
+    
+    res.json(listaProdotti);
+    console.log("prodotti carrello inviati");
+      
+     
+     },utente)
+
+  });
+
+  app.post('/ordini', function (req, res) {
+    console.log ('body req !stringify'+req.body);
+    
+    var ObjUtente = JSON.parse(req.body);
+    var utente = ObjUtente.eUtente;
+    
+    sqlite.getOrdini(function (Prodotti){
+    
+    var prodotti ={};
+    var listaProdotti={};
+    prodotti.Prodotti =Prodotti;
+    
+    var stringProdotti=JSON.stringify(prodotti);
+    
+    var prodottiObj= JSON.parse(stringProdotti);
+    
+    listaProdotti = prodottiObj;
+    
+    res.json(listaProdotti);
+    console.log("prodotti carrello inviati");
+      
+     
+     },utente)
+
+  });
+
+  app.post('/addPreferiti',function(req,res){
+    console.log('req.body= ',req.body);
+    var prodottoReq=JSON.parse(req.body);
+    var utente = prodottoReq.utente;
+    var codice = prodottoReq.codice;
+    var nome = prodottoReq.nome;
+    var prezzo = prodottoReq.prezzo; 
+    var img = prodottoReq.immagine;
+    sqlite.aggiungiAiPreferiti(utente,codice,prezzo,nome,img);
+    
+  });
+
+  app.post('/preferiti', function (req, res) {
+    console.log ('body req !stringify'+req.body);
+    
+    var ObjUtente = JSON.parse(req.body);
+    var utente = ObjUtente.eUtente;
+    
+    sqlite.getPreferiti(function (Prodotti){
     
     var prodotti ={};
     var listaProdotti={};

@@ -12,7 +12,7 @@
         <img src="assets/img/utKKQKyDQoiCMhu0pe0I__soccer_player-heading-photo.png" />
       </ion-avatar>
       <h2>
-        Ciao, (nome utente)
+        Ciao, {{email}}
       </h2>
     </ion-item>
   </ion-list>
@@ -21,12 +21,12 @@
     <ion-icon name="card"></ion-icon>
   </button>
   <div class="spacer" style="height:10px;" id="profilo-spacer8"></div>
-  <button id="profilo-button11" ion-button color="light" block icon-right>
+  <button id="profilo-button11" ion-button color="light" block icon-right (click)='goToPreferiti()'>
     I Miei Preferiti
     <ion-icon name="star"></ion-icon>
   </button>
   <div class="spacer" style="height:10px;" id="profilo-spacer9"></div>
-  <button id="profilo-button12" ion-button color="light" block icon-right>
+  <button id="profilo-button12" ion-button color="light" block icon-right (click)='goToOrdini()'>
     I Miei Ordini
     <ion-icon name="cube"></ion-icon>
   </button>

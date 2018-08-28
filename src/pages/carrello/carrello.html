@@ -13,10 +13,10 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding  style="background:url(assets/img/T5q9b13kSSWoFVeTA8Ac_header_bg.jpg) no-repeat center;background-size:cover;" >
 
   <ion-list  *ngFor="let p of visualizzaProdotti">
-    <ion-item-sliding>
+    
       <ion-item color="none" id="negozio-list-item5">
          <ion-thumbnail item-left>
           <img src= "{{p.immagine}}"/>
@@ -24,20 +24,20 @@
         <h2>
           {{p.nome}}
         </h2>
-        <p>Prezzo: {{p.prezzo}}</p>
-        <p>Pezzi Disponibili: {{p.quantita}}</p>
+        <p>Prezzo: {{p.prezzo}}€</p>
+        <p>Pezzi Ordinati: {{p.quantita}}</p>
       </ion-item>
-      <ion-item-options side="left">
-        <button ion-button color="secondary">
-          Preferiti
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-    <button ion-button full icon-end (click)='aggiungiAlCarrello(p)'>
-        Aggiungi al Carrello
-      <ion-icon name="cart"></ion-icon>
-    </button>
   </ion-list>
   <div class="spacer" style="height:15px;" id="negozio-spacer5"></div>
+  
+  
+  <ion-item>
+  <ion-label style="text-align: center">Prezzo Totale: {{totaleOrdine()}}€</ion-label>
+  </ion-item>
+  
+  <button ion-button full icon-end  color='secondary' (click)='confermaOrdine(visualizzaProdotti)'>
+    Conferma ordine
+  <ion-icon name="card"></ion-icon>
+</button>
 
 </ion-content>

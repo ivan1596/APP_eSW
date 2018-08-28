@@ -21,16 +21,18 @@
         <h2>
           {{p.nome}}
         </h2>
-        <p>Prezzo: {{p.prezzo}}</p>
-        <p>Pezzi Disponibili: {{p.quantita}}</p>
+        <p>Prezzo: {{p.prezzo }}€</p>
+        <p>Pezzi Disponibili: {{p.pDisponibili}}</p>
+        
       </ion-item>
+
       <ion-item-options side="left">
-        <button ion-button color="secondary">
+        <button ion-button color="secondary" (click)='aggiungiAiPreferiti(p)'>
           Preferiti
         </button>
       </ion-item-options>
-    </ion-item-sliding>
-    <button ion-button full icon-end (click)='aggiungiAlCarrello(p)'>
+    </ion-item-sliding> 
+    <button ion-button full icon-end (click)='showRadio(p.pDisponibili,p)'>
         Aggiungi al Carrello
       <ion-icon name="cart"></ion-icon>
     </button>
