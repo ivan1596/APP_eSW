@@ -14,13 +14,23 @@
 
 
 <ion-content padding  style="background:url(assets/img/T5q9b13kSSWoFVeTA8Ac_header_bg.jpg) no-repeat center;background-size:cover;" >
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Trascina per aggiornare"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list  *ngFor="let p of visualizzaProdotti">
     
       <ion-item color="none" id="negozio-list-item5">
          <ion-thumbnail item-left>
           <img src= "{{p.immagine}}"/>
         </ion-thumbnail>  
+        <ion-fab bottom right  >
+          <button ion-fab mini color="danger" (click)='rimuoviProdotto(p)'><ion-icon name="close"></ion-icon></button>
+        </ion-fab>
         <h2>
           {{p.nome}}
         </h2>

@@ -44,6 +44,8 @@ export class CarrelloPage {
     return sum;
      
   } 
+
+
    
 
   
@@ -81,10 +83,19 @@ export class CarrelloPage {
   });
   this.showConfirm();
 }
-  
-  
 
-  ionViewDidLoad() {
+  rimuoviProdotto(p){
+  var codice = p.codice;
+  var quantita = p.quantita;
+  this.http.get('http://localhost:8080/rimuoviProdotto/' + this.email+'/'+codice+'/'+quantita).pipe(
+    map(res => res.json())
+  ).subscribe(response => {
+    console.log('GET Response:', response);
+  });
+  
+}
+  
+  caricaProdotti(){
     var eUtente = this.email;
     var utente = JSON.stringify({eUtente});
     this.http.post('http://localhost:8080/carrello', utente).pipe(
@@ -95,6 +106,19 @@ export class CarrelloPage {
      console.log("Oggetto nell indice: ",x + " ",this.visualizzaProdotti[x]);
     }      
   });
+}  
+
+  doRefresh(refresher) {
+  console.log('Inizio operazione asincrona', refresher);
+  this.caricaProdotti();
+  setTimeout(() => {
+    console.log('Fine operazione asincrona');
+    refresher.complete();
+  }, 1500);
 }
+
+  ionViewDidLoad() { this.caricaProdotti(); }
+    
+ 
 
 }

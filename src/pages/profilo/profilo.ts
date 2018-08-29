@@ -5,6 +5,7 @@ import { LoginPage } from '../login/login';
 import { OrdiniPage } from '../ordini/ordini';
 import firebase from 'firebase';
 import { PreferitiPage } from '../preferiti/preferiti';
+import { DatiPersonaliPage } from '../dati-personali/dati-personali';
 
 @Component({
   selector: 'page-profilo',
@@ -21,6 +22,10 @@ export class ProfiloPage {
 
   goToOrdini(){
     this.navCtrl.push(OrdiniPage);
+  }
+
+  goToDatiPersonali(){
+    this.navCtrl.push(DatiPersonaliPage);
   }
 
   goToPreferiti(){

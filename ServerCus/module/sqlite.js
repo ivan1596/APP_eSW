@@ -49,6 +49,8 @@ module.exports = {
         db.close();
     },
 
+    
+
     aggiungiOrdine: function (utente,codice,data,quantita,nome,prezzo,img) {
         let db = new sqlite3.Database(database);
         let sql = `INSERT INTO ORDINI (Utente,Codice,Data,Nome,Quantita,Prezzo,Immagine)  
@@ -162,6 +164,18 @@ module.exports = {
         db.close();
     },
 
+    ripristinaQuantità: function(nProdOrd,codice){
+        let db = new sqlite3.Database(database);
+        let sql = 'UPDATE Catalogo SET Quantità = Quantità + ? WHERE CodiceProd = ?'
+        db.run(sql,nProdOrd,codice,function(err){
+            if(err){
+                console.error(err.message);
+            }
+            console.log('Hai aggiornato le quantita');
+        });
+        db.close();
+    },
+
     aggiungiAiPreferiti: function (utente,codice,prezzo,nome,img) {
         let db = new sqlite3.Database(database);
         let sql = `INSERT INTO PREFERITI (Utente,Codice,Prezzo,Nome,Immagine)  
@@ -211,6 +225,20 @@ module.exports = {
         db.close();
 
     },
+
+    cancellaPreferito: function(utente,codice){
+        let db = new sqlite3.Database(database);
+        let sql = 'DELETE FROM PREFERITI WHERE UTENTE = ? AND CODICE = ?'
+        db.run(sql,utente,codice,function(err){
+            if(err){
+                console.error(err.message);
+            }
+            console.log('Hai eliminato i prodotti correttamente');
+        });
+        db.close();
+    },
+
+    
 
 
 

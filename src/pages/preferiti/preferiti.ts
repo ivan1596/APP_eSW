@@ -25,6 +25,16 @@ export class PreferitiPage {
   
   email = this.user.email;
 
+
+  rimuoviPreferito(p){
+    var codice = p.codice;
+    this.http.get('http://localhost:8080/rimuoviPreferito/' + this.email+'/'+codice).pipe(
+      map(res => res.json())
+  ).subscribe(response => {
+      console.log('GET Response:', response);
+  });
+  }
+
   ionViewDidLoad() {
     var eUtente = this.email;
     var utente = JSON.stringify({eUtente});

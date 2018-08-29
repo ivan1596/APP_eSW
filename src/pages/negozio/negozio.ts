@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { CarrelloPage } from '../carrello/carrello';
 import firebase from 'firebase';
 import { AlertController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'page-negozio',
@@ -12,20 +13,20 @@ import { AlertController } from 'ionic-angular';
 })
 export class NegozioPage {
 
-  constructor(public navCtrl: NavController, public http: Http,public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public http: Http,public alertCtrl: AlertController,public toastCtrl: ToastController) {
   }
   catalogo=[];
   prodottiCatalogo=[];
   user = firebase.auth().currentUser;
   email= this.user.email;
-  testRadioOpen;
-  //testRadioResult = 1;
-  //nSelez = this.testRadioResult -1;
+  
 
 
   goToCarrello(){
     this.navCtrl.push(CarrelloPage);
   }
+
+
 
 
    aggiungiAlCarrello(prodottoDaAggiungere,quantitaOrdine){
@@ -42,7 +43,7 @@ export class NegozioPage {
         ).subscribe(request => {
           console.log('POST Response:', request);
         });
-    
+    this.carrelloToast(nome);
     
   }
 
@@ -60,6 +61,9 @@ export class NegozioPage {
         ).subscribe(request => {
           console.log('POST Response:', request);
         });
+    
+        this.preferitiToast(nome);
+    
 
   }
 
@@ -96,13 +100,43 @@ export class NegozioPage {
     
   }
 
-  getResults(n) :number{
-    return n;
+  carrelloToast(nome) {
+    const toast = this.toastCtrl.create({
+      message: nome + ' aggiunto al carello',
+      duration: 1500,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  preferitiToast(nome) {
+    const toast = this.toastCtrl.create({
+      message: nome + ' aggiunto ai preferiti',
+      duration: 1500,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  disabilitaBottone(n) : boolean{
+    if(n == 0) return true;
+    else
+    return false;
+
+  }
+
+  doRefresh(refresher) {
+    console.log('Inizio operazione asincrona', refresher);
+    this.loadProdotti();
+    setTimeout(() => {
+      console.log('Fine operazione asincrona');
+      refresher.complete();
+    }, 1500);
   }
 
 
-  ionViewDidLoad() {
-    this.http.get('http://localhost:8080/prodotti' ).pipe(
+loadProdotti(){
+  this.http.get('http://localhost:8080/prodotti' ).pipe(
      map(res => res.json())
    ).subscribe(listaProdotti => {
    for(var x in listaProdotti.Prodotti){
@@ -112,5 +146,11 @@ export class NegozioPage {
    }      
  });
 }
+
+
+  ionViewDidLoad() {
+    this.loadProdotti();
+
+  }
 
 }

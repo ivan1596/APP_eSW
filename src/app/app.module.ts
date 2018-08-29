@@ -17,12 +17,13 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import {CarrelloPage} from '../pages/carrello/carrello';
 import {OrdiniPage} from '../pages/ordini/ordini';
 import {PreferitiPage} from '../pages/preferiti/preferiti';
-
+import {DatiPersonaliPage} from '../pages/dati-personali/dati-personali';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FIREBASE_CONFIG } from './app.firebase.conf';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { FIREBASE_CONFIG } from './app.firebase.conf';
     ContattaciPage,
     CarrelloPage,
     OrdiniPage,
-    PreferitiPage
+    PreferitiPage,
+    DatiPersonaliPage
   ],
   imports: [
     HttpClientModule,
@@ -44,6 +46,7 @@ import { FIREBASE_CONFIG } from './app.firebase.conf';
     HttpModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -58,7 +61,8 @@ import { FIREBASE_CONFIG } from './app.firebase.conf';
     ContattaciPage,
     CarrelloPage,
     OrdiniPage,
-    PreferitiPage
+    PreferitiPage,
+    DatiPersonaliPage
   ],
   providers: [
     GooglePlus,

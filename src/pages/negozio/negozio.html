@@ -11,7 +11,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding style="background:url(assets/img/T5q9b13kSSWoFVeTA8Ac_header_bg.jpg) no-repeat center;background-size:cover;" id="page5">
-
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list  *ngFor="let p of catalogo">
     <ion-item-sliding>
       <ion-item color="none" id="negozio-list-item5">
@@ -32,7 +39,7 @@
         </button>
       </ion-item-options>
     </ion-item-sliding> 
-    <button ion-button full icon-end (click)='showRadio(p.pDisponibili,p)'>
+    <button ion-button full icon-end (click)='showRadio(p.pDisponibili,p)' [disabled]=' disabilitaBottone(p.pDisponibili)'>
         Aggiungi al Carrello
       <ion-icon name="cart"></ion-icon>
     </button>

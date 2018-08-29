@@ -20,6 +20,21 @@
         </ion-label>
         <ion-input type="password"  #password="ngModel" [(ngModel)]="user.password" name="password" minlength="6" required ngControl="password"></ion-input>
       </ion-item>
+
+      <ion-item>
+          <ion-label>Username</ion-label>
+          <ion-input [(ngModel)]= "profilo.username" name='username'></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label >Nome</ion-label>
+            <ion-input [(ngModel)]= "profilo.nome" name='nome'></ion-input>
+        </ion-item>
+        
+        <ion-item>
+            <ion-label>Cognome</ion-label>
+            <ion-input [(ngModel)]= "profilo.cognome" name='cognome'></ion-input>
+        </ion-item>
       <div *ngIf="password.errors?.minlength" class="alert alert-danger">LA PASSWORD DEVE AVERE MINIMO 6 CARATTERI</div>
       <div *ngIf="password.errors?.required" class="alert alert-danger"  background-color="white">PASSWORD OBBLIGATORIA</div>
     </ion-list>

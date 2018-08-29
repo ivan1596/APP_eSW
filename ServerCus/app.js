@@ -191,6 +191,32 @@ app.post('/confermaOrdine',function(req,res){
 
   });
 
+  app.get('/rimuoviProdotto/:utente/:codice/:quantita',function(req,res){
+    
+    
+    var utente = req.params.utente;
+    console.log('param remove ',utente);
+    var codice = req.params.codice;
+    console.log('param remove ',codice);
+    var quantita = req.params.quantita;
+    console.log('param remove',quantita)
+    sqlite.cancellaProdotti(utente,codice);
+    sqlite.ripristinaQuantità(quantita,codice);
+    
+  });
+
+  app.get('/rimuoviPreferito/:utente/:codice',function(req,res){
+    
+    
+    var utente = req.params.utente;
+    //console.log('param remove ',utente);
+    var codice = req.params.codice;
+    //console.log('param remove ',codice);
+    sqlite.cancellaPreferito(utente,codice);
+    
+    
+  });
+
 //Inizializza il server
 app.listen(8080, function() {
     console.log('listening on 8080');

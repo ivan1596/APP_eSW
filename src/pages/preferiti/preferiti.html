@@ -21,6 +21,9 @@
            <ion-thumbnail item-left>
             <img src= "{{p.immagine}}"/>
           </ion-thumbnail>  
+          <ion-fab bottom right  >
+            <button ion-fab mini color="danger" (click)='rimuoviPreferito(p)'><ion-icon name="close"></ion-icon></button>
+          </ion-fab>
           <h2>
             {{p.nome}}
           </h2>
