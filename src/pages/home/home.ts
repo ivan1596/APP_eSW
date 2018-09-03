@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ProfiloPage } from '../profilo/profilo';
 import { NegozioPage } from '../negozio/negozio';
-import { CorsiPage } from '../corsi/corsi';
 import { ContattaciPage } from '../contattaci/contattaci';
-import {AngularFireAuth} from 'angularfire2/auth';
-import { DatiPersonaliPage } from '../dati-personali/dati-personali';
+import { CarrelloPage } from '../carrello/carrello';
+
 
 @Component({
   selector: 'page-home',
@@ -13,7 +12,7 @@ import { DatiPersonaliPage } from '../dati-personali/dati-personali';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController,private afAuth:AngularFireAuth ) {
+  constructor(public navCtrl: NavController ) {
   }
   
 
@@ -23,9 +22,9 @@ export class HomePage {
   }goToNegozio(params){
     if (!params) params = {};
     this.navCtrl.push(NegozioPage);
-  }goToCorsi(params){
+  }goToCarrello(params){
     if (!params) params = {};
-    this.navCtrl.push(CorsiPage);
+    this.navCtrl.push(CarrelloPage);
   }goToContattaci(params){
     if (!params) params = {};
     this.navCtrl.push(ContattaciPage);
@@ -33,14 +32,7 @@ export class HomePage {
 
 
   ionViewDidLoad() {
-    // this.afAuth.authState.take(1).subscribe(auth => {
-    //   if(!auth.uid){
-    //       this.navCtrl.setRoot(DatiPersonaliPage);
-    //   }
-    //   else{
-    //     this.navCtrl.setRoot(HomePage);
-    //   }
-    // })  
+   
   }
 
 }

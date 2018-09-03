@@ -1,8 +1,8 @@
 export const FIREBASE_CONFIG =  {
-    apiKey: "AIzaSyCQbKAwrlDxwVT0Hw6p_MikKZH5-_gtARo",
-    authDomain: "app-cus.firebaseapp.com",
-    databaseURL: "https://app-cus.firebaseio.com",
-    projectId: "app-cus",
-    storageBucket: "app-cus.appspot.com",
-    messagingSenderId: "953884612296"
+  apiKey: "AIzaSyC_bIAPjZYS0S_cyUKfcirGVlj9XUWPPiU",
+  authDomain: "esportswear-f9551.firebaseapp.com",
+  databaseURL: "https://esportswear-f9551.firebaseio.com",
+  projectId: "esportswear-f9551",
+  storageBucket: "",
+  messagingSenderId: "818738956421"
   };

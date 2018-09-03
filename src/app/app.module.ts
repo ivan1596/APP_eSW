@@ -7,7 +7,6 @@ import { LoginPage } from '../pages/login/login';
 import { RegistrazionePage } from '../pages/registrazione/registrazione';
 import { ProfiloPage } from '../pages/profilo/profilo';
 import { NegozioPage } from '../pages/negozio/negozio';
-import { CorsiPage } from '../pages/corsi/corsi';
 import { ContattaciPage } from '../pages/contattaci/contattaci';
 import { HttpModule } from '@angular/http';
 import {AngularFireModule} from 'angularfire2';
@@ -33,7 +32,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     RegistrazionePage,
     ProfiloPage,
     NegozioPage,
-    CorsiPage,
     ContattaciPage,
     CarrelloPage,
     OrdiniPage,
@@ -47,6 +45,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -57,7 +56,6 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
     RegistrazionePage,
     ProfiloPage,
     NegozioPage,
-    CorsiPage,
     ContattaciPage,
     CarrelloPage,
     OrdiniPage,

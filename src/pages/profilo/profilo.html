@@ -5,21 +5,17 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding style="background:url(assets/img/pZWKRNXLR6kiqNDFVtLw_header_bg.jpg) no-repeat center;background-size:cover;" id="page4">
+<ion-content padding style="background:url(assets/img/sfondoconlogo.jpeg) no-repeat center;background-size:cover;" id="page4">
   <ion-list id="profilo-list3">
     <ion-item color="none" id="profilo-list-item3">
       <ion-avatar item-left>
         <img src="assets/img/utKKQKyDQoiCMhu0pe0I__soccer_player-heading-photo.png" />
       </ion-avatar>
       <h2>
-        Ciao, {{email}}
+        Ciao {{ (datiProfilo | async)?.username }}
       </h2>
     </ion-item>
   </ion-list>
-  <button id="profilo-button10" ion-button color="light" block icon-right>
-    La Mia Tessera
-    <ion-icon name="card"></ion-icon>
-  </button>
   <div class="spacer" style="height:10px;" id="profilo-spacer8"></div>
   <button id="profilo-button11" ion-button color="light" block icon-right (click)='goToPreferiti()'>
     I Miei Preferiti
