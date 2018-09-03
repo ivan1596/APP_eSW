@@ -33,7 +33,7 @@ export class OrdiniPage {
   ionViewDidLoad() {
     var eUtente = this.email;
     var utente = JSON.stringify({eUtente});
-    this.http.post('http://localhost:8080/ordini', utente).pipe(
+    this.http.post('http://localhost:8080/ordini', utente).pipe( 
      map(res => res.json())
    ).subscribe(productList => {
    for(var x in productList.Prodotti){
