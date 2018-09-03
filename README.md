@@ -1,10 +1,10 @@
 ﻿# APP_eSW
 REQUISITI:
 -AVER INSTALLATO NPM e NODEJS
--INSTALLARE IONIC E CORDOVA 
+-INSTALLARE IONIC E CORDOVA (per installare npm install -g ionic cordova)
 PROCEDIMENTO:
 Entrare nella cartella APP_eSW e aprire terminale
-Eseguire: npm install -g ionic cordova
-Eseguire: ionic start 
-Se si vuole vedere il risultato su mobile installare sul cellulare ionic devapp
+Eseguire: ionic serve per avviare il proggetto
+Eseguire:cd server poi node app.js per avviare il server 
+
 
