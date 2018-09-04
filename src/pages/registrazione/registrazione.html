@@ -12,7 +12,7 @@
         <ion-label>
           Email
         </ion-label>
-        <ion-input type="text"  [(ngModel)]="user.email" name="email"></ion-input>
+        <ion-input type="text"  [(ngModel)]="user.email" name="email" required #email="ngModel"></ion-input>
       </ion-item>
       <ion-item id="registrazione-input5">
         <ion-label>
@@ -49,11 +49,13 @@
 
         <ion-item>
           <ion-label>Indirizzo</ion-label>
-          <ion-input [(ngModel)]= "profilo.indirizzo" name='indirizzo'></ion-input>
+          <ion-input [(ngModel)]= "profilo.indirizzo" name='indirizzo' required #indirizzo="ngModel"></ion-input>
         </ion-item>
 
       <div *ngIf="password.errors?.minlength" class="alert alert-danger">LA PASSWORD DEVE AVERE MINIMO 6 CARATTERI</div>
       <div *ngIf="password.errors?.required" class="alert alert-danger"  background-color="white">PASSWORD OBBLIGATORIA</div>
+      <div *ngIf="email.errors?.required" class="alert alert-danger"  background-color="white">EMAIL OBBLIGATORIA</div>
+      <div *ngIf="indirizzo.errors?.required" class="alert alert-danger"  background-color="white">INDIRIZZO OBBLIGATORIO</div>
     </ion-list>
     <button id="registrazione-button3" ion-button color="stable" block (click)="reg(user)">
       Registrati

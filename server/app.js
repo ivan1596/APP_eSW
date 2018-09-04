@@ -35,17 +35,12 @@ app.get('/prodotti', function (req, res) {
     var prodotti ={};
     var productList={};
     prodotti.Prodotti =Prodotti;
-    
     var stringProdotti=JSON.stringify(prodotti);// prodotto stringato del db da parsare 
-    
     var allProductJsonParsed= JSON.parse(stringProdotti);
-    
-    var obj = allProductJsonParsed;
     productList=allProductJsonParsed;
     
-    //var prodottiList=JSON.stringify(obj);
     res.json(productList);
-    //console.log("prodotti catalogo inviati");
+    
 
   })
 });
@@ -180,11 +175,8 @@ app.post('/confermaOrdine',function(req,res){
     
     
     var utente = req.params.utente;
-    console.log('param remove ',utente);
     var codice = req.params.codice;
-    console.log('param remove ',codice);
     var quantita = req.params.quantita;
-    console.log('param remove',quantita)
     sqlite.cancellaProdotti(utente,codice);
     sqlite.ripristinaQuantità(quantita,codice);
     
@@ -194,9 +186,9 @@ app.post('/confermaOrdine',function(req,res){
     
     
     var utente = req.params.utente;
-    //console.log('param remove ',utente);
+    
     var codice = req.params.codice;
-    //console.log('param remove ',codice);
+    
     sqlite.cancellaPreferito(utente,codice);
     
     
